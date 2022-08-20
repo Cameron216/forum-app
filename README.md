@@ -19,6 +19,9 @@
   - [ ]  Proxy in package json be easiest (part of cra toolkit)
     - [ ]  Or can have environment variables for different environment urls
 - [ ]  Setup storybook for component ui library
+  - [x]  Install storybook
+  - [ ]  Setup storybook folder structure
+  - [ ]  Add any storybook addons required
 - [ ]  What to use for styling ui (I don’t mind)
   - [ ]  Plain css with css modules?
   - [ ]  Sass?
