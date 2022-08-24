@@ -22,13 +22,9 @@
   - [x]  Install storybook
   - [ ]  Setup storybook folder structure
   - [ ]  Add any storybook addons required
-- [ ]  What to use for styling ui (I don’t mind)
-  - [ ]  Plain css with css modules?
-  - [ ]  Sass?
-  - [ ]  Styled components?
-  - [ ]  Bootstrap?
-  - [ ]  Tailwind css?
-  - [ ]  Something else?
+- [x]  What to use for styling ui (I don’t mind)
+  - [x] Install Chakra UI
+  - [ ] Set up Chakra UI with Storybook
 - [ ]  Build out frontend
   - [ ]  Pages
     - [ ]  Login/logout
@@ -55,7 +51,7 @@
     - [ ]  Save post
     - [ ]  Edit post
     - [ ]  Get posts
-      - [ ]  Paginate response (send x records at a time)
+    - [ ]  Paginate response (send x records at a time)
     - [ ]  Get post by id
 - [ ]  Setup database
   - [ ]  What to use for this? Sql? Local or something like google firebase?
