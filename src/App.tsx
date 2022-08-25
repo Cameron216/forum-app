@@ -1,7 +1,13 @@
-import React from 'react'
+import React from 'react';
+import AccountPage from './pages/AccountPage';
 
 function App() {
-  return <div>Simple forum app</div>
+  return (
+    <>
+      <div>Simple forum app</div>
+      <AccountPage />
+    </>
+  );
 }
 
-export default App
+export default App;
