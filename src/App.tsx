@@ -1,11 +1,14 @@
+
+//add routing and links
+
 import React from 'react';
 import AccountPage from './pages/AccountPage';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
     <>
-      <div>Simple forum app</div>
-      <AccountPage />
+      <HomePage />
     </>
   );
 }
