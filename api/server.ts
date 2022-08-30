@@ -1,15 +1,15 @@
-import express, { Express, Request, Response } from 'express'
-import dotenv from 'dotenv'
+import express, { Express } from 'express';
+import dotenv from 'dotenv';
 
-dotenv.config()
+import { router as postsRouter } from './routes/posts';
 
-const app: Express = express()
-const port = process.env.PORT
+dotenv.config();
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello!!')
-})
+const app: Express = express();
+const port = process.env.PORT;
+
+app.use('/posts', postsRouter);
 
 app.listen(port, () => {
-  console.log(`Server listening on port: ${port}`)
-})
+  console.log(`Server listening on port: ${port}`);
+});
