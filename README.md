@@ -6,25 +6,38 @@
 
 - React
 - Typescript
+- Storybook
+- ChakraUI
 
 ### API
 
 - Express
 - Node.js
 - Typescript
+- MySQL
+
+## DB tables
+
+| Post | User |  
+| ---- | ---- |  
+| Id   | Id    |  
+| UserId | username |
+| parentPostId | email |
+| createdDate | displayName |
+| updatedDate | password |
+| postTitle | profilePicture |
+| postContent | dateJoined |
 
 ## ToDo
 
-- [ ]  Connect frontend to backend
-  - [ ]  Proxy in package json be easiest (part of cra toolkit)
-    - [ ]  Or can have environment variables for different environment urls
+- [x]  Connect frontend to backend
 - [ ]  Setup storybook for component ui library
   - [x]  Install storybook
   - [ ]  Setup storybook folder structure
   - [ ]  Add any storybook addons required
 - [x]  What to use for styling ui (I don’t mind)
   - [x] Install Chakra UI
-  - [ ] Set up Chakra UI with Storybook
+  - [x] Set up Chakra UI with Storybook
 - [ ]  Build out frontend
   - [ ]  Pages
     - [ ]  Login/logout
@@ -54,7 +67,7 @@
     - [ ]  Paginate response (send x records at a time)
     - [ ]  Get post by id
 - [ ]  Setup database
-  - [ ]  What to use for this? Sql? Local or something like google firebase?
+  - [x]  Create RDS MySQL db in AWS
   - [ ]  Create database table layout
   - [ ]  Connect api to db
 - [ ]  Setup authentication
@@ -66,6 +79,7 @@
       - [ ]  Some then else?
       - [ ]  What is used in the industry currently?
 - [ ]  Setup env files for both frontend and backend
+- [ ]  Setup pre-commit hooks for linting project
 - [ ]  Add content to readme file
   - [ ]  Project details
   - [ ]  How to clone and start the project etc
