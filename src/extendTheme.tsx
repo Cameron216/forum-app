@@ -17,19 +17,19 @@ const customTheme = extendTheme({
   },
   colors: {
     brand: {
-        100: '#1D4044'
+      100: '#1D4044',
     },
     buttons: {
-        100: 'blue'
+      100: 'blue',
     },
     grey: {
-        600: 'hsla(0, 0%, 8%, 1)',
-        500: 'hsla(0, 0%, 10%, 1)',
-        400: 'hsla(0, 0%, 12%, 1)',
-        300: 'hsla(0, 0%, 14%, 1)',
-        200: 'hsla(0, 0%, 16%, 1)',
-        100: 'hsla(0, 0%, 1%, 1)'
-    }
+      600: 'hsla(0, 0%, 8%, 1)',
+      500: 'hsla(0, 0%, 10%, 1)',
+      400: 'hsla(0, 0%, 12%, 1)',
+      300: 'hsla(0, 0%, 14%, 1)',
+      200: 'hsla(0, 0%, 16%, 1)',
+      100: 'hsla(0, 0%, 1%, 1)',
+    },
   },
   fonts: {
     body: '',
@@ -38,19 +38,19 @@ const customTheme = extendTheme({
   },
   components: {
     Button: {
-        defaultProps: {
-            colorScheme: 'teal'
-        }
+      defaultProps: {
+        colorScheme: 'teal',
+      },
     },
     Submit: {
-        // colorScheme: 'teal'
+      // colorScheme: 'teal'
     },
     Drawer: {
-        defaultProps: {
-            size: 'sm'
-          }
-    }
-  }
+      defaultProps: {
+        size: 'sm',
+      },
+    },
+  },
 });
 
 export default customTheme;
