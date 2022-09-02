@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  forum-ui:
+    build: .
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/app/src
+      - /app/node_modules
+    stdin_open: true
+    tty: true
