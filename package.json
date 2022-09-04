@@ -22,7 +22,7 @@
   },
   "scripts": {
     "setup": "npm i && cd api && npm i",
-    "start": "WATCHPACK_POLLING=true react-scripts start",
+    "start": "react-scripts start WATCHPACK_POLLING=true",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
