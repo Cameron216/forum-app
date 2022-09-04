@@ -1,7 +1,9 @@
 version: '3.8'
 services:
   forum-ui:
-    build: .
+    build:
+      context: .
+      target: install
     environment:
       - CHOKIDAR_USEPOLLING=true
     ports:
@@ -11,3 +13,17 @@ services:
       - /app/node_modules
     stdin_open: true
     tty: true
+  forum-ui-storybook:
+    build:
+      context: .
+      target: install
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - 6006:6006      
+    volumes:
+      - ./src:/app/src
+      - /app/node_modules
+    stdin_open: true
+    tty: true
+    command: npm run storybook
