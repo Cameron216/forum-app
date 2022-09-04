@@ -13,6 +13,8 @@ services:
       - /app/node_modules
     stdin_open: true
     tty: true
+    depends_on:
+      - forum-api
   forum-ui-storybook:
     build:
       context: .
@@ -20,10 +22,21 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
     ports:
-      - 6006:6006      
+      - 6006:6006
     volumes:
       - ./src:/app/src
       - /app/node_modules
     stdin_open: true
     tty: true
     command: npm run storybook
+  forum-api:
+    build:
+      context: ./api
+      target: install
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - 5000:5000
+    volumes:
+      - ./api:/app
+      - /app/node_modules
