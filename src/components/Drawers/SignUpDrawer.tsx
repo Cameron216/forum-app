@@ -1,105 +1,100 @@
-
 //add proper form and functionality for signing up
 
-import React from 'react'
+import React from 'react';
 
-import { useDisclosure, 
-    Drawer,
-    DrawerBody,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerOverlay,
-    DrawerContent,
-    DrawerCloseButton,
-    Button,
-    Box,
-    FormLabel,
-    Stack,
-    Input,
-    Radio,
-    Spacer, } from '@chakra-ui/react'
+import {
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  Button,
+  Box,
+  FormLabel,
+  Stack,
+  Input,
+  Radio,
+} from '@chakra-ui/react';
 
 const SignUpDrawer = ({ isOpen, onClose }: any) => {
   const firstField = React.useRef() as React.MutableRefObject<HTMLInputElement>;
-  
+
   return (
     <>
-    <Drawer
+      <Drawer
         isOpen={isOpen}
-        placement='right'
+        placement="right"
         initialFocusRef={firstField}
         onClose={onClose}
-        >
+      >
         <DrawerOverlay />
-        <DrawerContent bg='grey.400'>
-        <DrawerCloseButton />
-        <DrawerHeader borderBottomWidth='1px'>
-        Create a new account
-        </DrawerHeader>
+        <DrawerContent bg="grey.400">
+          <DrawerCloseButton />
+          <DrawerHeader borderBottomWidth="1px">
+            Create a new account
+          </DrawerHeader>
 
-        <DrawerBody>
-            <Stack spacing='24px'>
-                <Box>
-                <FormLabel htmlFor='username'>Username</FormLabel>
+          <DrawerBody>
+            <Stack spacing="24px">
+              <Box>
+                <FormLabel htmlFor="username">Username</FormLabel>
                 <Input
-                    ref={firstField}
-                    id='username'
-                    placeholder='Please enter user name'
+                  ref={firstField}
+                  id="username"
+                  placeholder="Please enter user name"
                 />
-                </Box>
+              </Box>
 
-                <Box>
-                <FormLabel htmlFor='firstName'>First Name</FormLabel>
+              <Box>
+                <FormLabel htmlFor="firstName">First Name</FormLabel>
+                <Input id="firstName" placeholder="Please enter first name" />
+              </Box>
+
+              <Box>
+                <FormLabel htmlFor="firstName">Last Name</FormLabel>
+                <Input id="lastName" placeholder="Please enter last name" />
+              </Box>
+
+              <Box>
+                <FormLabel htmlFor="email">Email</FormLabel>
                 <Input
-                    id='firstName'
-                    placeholder='Please enter first name'
+                  type="email"
+                  id="Email"
+                  placeholder="Please email address"
                 />
-                </Box>
+              </Box>
 
-                <Box>
-                <FormLabel htmlFor='firstName'>Last Name</FormLabel>
+              <Box>
+                <FormLabel htmlFor="password">Password</FormLabel>
                 <Input
-                    id='lastName'
-                    placeholder='Please enter last name'
+                  type="password"
+                  id="password"
+                  placeholder="Choose a strong password"
                 />
-                </Box>
+              </Box>
 
-                <Box>
-                <FormLabel htmlFor='email'>Email</FormLabel>
-                    <Input
-                    type='email'
-                    id='Email'
-                    placeholder='Please email address'
-                    />
-                </Box>
-
-                <Box>
-                <FormLabel htmlFor='password'>Password</FormLabel>
-                    <Input
-                    type='password'
-                    id='password'
-                    placeholder='Choose a strong password'
-                    />
-                </Box>
-
-                <Box>
-                <FormLabel htmlFor='terms'></FormLabel>
-                <Radio id='terms'>
-                    <option value='true'>I agree to the Terms &amp; Conditions</option>
+              <Box>
+                <FormLabel htmlFor="terms"></FormLabel>
+                <Radio id="terms">
+                  <option value="true">
+                    I agree to the Terms &amp; Conditions
+                  </option>
                 </Radio>
-                </Box>
+              </Box>
             </Stack>
-        </DrawerBody>
-        <DrawerFooter borderTopWidth='1px'>
-            <Button variant='outline' mr={3} onClick={onClose}>
-                Cancel
+          </DrawerBody>
+          <DrawerFooter borderTopWidth="1px">
+            <Button variant="outline" mr={3} onClick={onClose}>
+              Cancel
             </Button>
             <Button>Sign up</Button>
-        </DrawerFooter>
+          </DrawerFooter>
         </DrawerContent>
-    </Drawer>
-  </>
-  )
-}
+      </Drawer>
+    </>
+  );
+};
 
-export default SignUpDrawer
+export default SignUpDrawer;
