@@ -1,10 +1,13 @@
 import mysql from 'mysql2';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const dbConfig = {
-  host: 'forum-app.cgnuhmnigbpn.eu-west-2.rds.amazonaws.com',
-  user: 'admin',
-  password: 'passworddev1',
-  database: 'forum-app',
+  host: process.env.DB_HOST_NAME,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 };
 
 export const connection = mysql.createPool({
@@ -13,4 +16,3 @@ export const connection = mysql.createPool({
   password: dbConfig.password,
   database: dbConfig.database,
 });
-
