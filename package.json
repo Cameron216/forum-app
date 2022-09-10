@@ -25,7 +25,7 @@
     "setup": "npm i && cd api && npm i",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start\"",
     "server": "cd api && npm run dev",
-    "start": "react-scripts start WATCHPACK_POLLING=true",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
