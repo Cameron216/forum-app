@@ -16,11 +16,10 @@ exports.createPost = (req: Request, res: Response) => {
       postContent: 'postContent is required',
     });
   }
+
   const post = new Post(req.body);
-  Post.createPost(post, function (err: any, post: any) {
-    if (err) {
-      return res.status(403).send(err);
-    }
-    res.json(post);
-  });
+
+  Post.createPost(post)
+    .then((result: any) => res.send(result))
+    .catch((err: any) => console.log(err));
 };

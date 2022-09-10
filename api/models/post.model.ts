@@ -8,14 +8,16 @@ const Post = function (this: any, post: any) {
 };
 
 Post.createPost = (newPost: any) => {
-  console.log(connection);
-  connection.query('INSERT INTO Post SET ?', newPost, (err, res) => {
-    if (err) {
-      console.log('error: ', err);
-      return;
-    }
+  return new Promise((resolve, reject) => {
+    connection.query('INSERT INTO Post SET ?', newPost, (err, res) => {
+      if (err) {
+        console.log('error: ', err);
+        reject(err);
+      }
 
-    console.log('Post created: ', { id: res, ...newPost });
+      console.log('Post created: ', { id: res, ...newPost });
+      resolve(res);
+    });
   });
 };
 
