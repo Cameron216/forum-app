@@ -1,4 +1,5 @@
 import { connection } from '../config/db.config';
+import Logger from '../lib/logger';
 
 const Post = function (this: any, post: any) {
   this.userId = post.userId;
@@ -7,18 +8,22 @@ const Post = function (this: any, post: any) {
   this.postContent = post.postContent;
 };
 
-Post.createPost = (newPost: any) => {
-  return new Promise((resolve, reject) => {
-    connection.query('INSERT INTO Post SET ?', newPost, (err, res) => {
-      if (err) {
-        console.log('error: ', err);
-        reject(err);
-      }
+Post.createPost = async (newPost: any) => {
+  try {
+    const [rows] = await connection.query('INSERT INTO Post SET ?', newPost);
+    return rows;
+  } catch (err) {
+    Logger.error(err);
+  }
+};
 
-      console.log('Post created: ', { id: res, ...newPost });
-      resolve(res);
-    });
-  });
+Post.getPosts = async () => {
+  try {
+    const [rows, fields] = await connection.query('SELECT * FROM Post');
+    return { rows, fields };
+  } catch (err) {
+    Logger.error(err);
+  }
 };
 
 module.exports = Post;

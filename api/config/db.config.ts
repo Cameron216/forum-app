@@ -10,9 +10,11 @@ const dbConfig = {
   database: process.env.DB_NAME,
 };
 
-export const connection = mysql.createPool({
+const pool = mysql.createPool({
   host: dbConfig.host,
   user: dbConfig.user,
   password: dbConfig.password,
   database: dbConfig.database,
 });
+
+export const connection = pool.promise();

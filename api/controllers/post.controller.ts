@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 const Post = require('../models/post.model');
 
-exports.createPost = (req: Request, res: Response) => {
+exports.createPost = async (req: Request, res: Response) => {
   if (
     !req.body.userId ||
     !req.body.parentPostId ||
@@ -19,7 +19,13 @@ exports.createPost = (req: Request, res: Response) => {
 
   const post = new Post(req.body);
 
-  Post.createPost(post)
-    .then((result: any) => res.send(result))
-    .catch((err: any) => console.log(err));
+  const response = await Post.createPost(post);
+
+  response.insertId ? res.send({ success: true }) : res.send({ error: true });
+};
+
+exports.getPosts = async (req: Request, res: Response) => {
+  const allPosts = await Post.getPosts();
+
+  res.send(allPosts.rows);
 };
