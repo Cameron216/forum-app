@@ -2,6 +2,7 @@ import express, { Express } from 'express';
 import dotenv from 'dotenv';
 
 import { router as postRouter } from './routes/post';
+import Logger from './lib/logger';
 
 dotenv.config();
 
@@ -13,5 +14,5 @@ app.use(express.json());
 app.use('/post', postRouter);
 
 app.listen(port, () => {
-  console.log(`Server listening on port: ${port}`);
+  Logger.info(`Server listening on port: ${port}`);
 });
