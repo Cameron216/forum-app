@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/server.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\" WATCHPACK_POLLING=true"
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\""
   },
   "keywords": [],
   "author": "",
@@ -15,7 +15,8 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "mysql2": "^2.3.3",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "winston": "^3.8.2"
   },
   "devDependencies": {
     "concurrently": "^7.3.0",
