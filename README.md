@@ -22,11 +22,11 @@
 | ---- | ---- |  
 | Id   | Id    |  
 | UserId | username |
-| parentPostId | email |
+| parentPostId | dateJoined |
 | createdDate | displayName |
 | updatedDate | password |
 | postTitle | profilePicture |
-| postContent | dateJoined |
+| postContent |
 
 ## ToDo
 
