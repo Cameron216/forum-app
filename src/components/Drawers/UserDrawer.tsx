@@ -1,7 +1,7 @@
 //have conditional rendering if logged in or not
 //when logged in becomes utility sidebar with profile settings etc.
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Drawer,
   DrawerBody,
@@ -19,7 +19,7 @@ import {
 
 const UserDrawer = ({ isOpen, onClose }: any) => {
   const firstField = React.useRef() as React.MutableRefObject<HTMLInputElement>;
-
+  
   return (
     <>
       <Drawer

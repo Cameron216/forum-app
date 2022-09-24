@@ -1,6 +1,6 @@
 //add proper form and functionality for signing up
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Drawer,
@@ -16,10 +16,26 @@ import {
   Stack,
   Input,
   Radio,
+  Checkbox,
 } from '@chakra-ui/react';
 
 const SignUpDrawer = ({ isOpen, onClose }: any) => {
   const firstField = React.useRef() as React.MutableRefObject<HTMLInputElement>;
+
+  const [userDetails, setUserDetails] = useState({
+    username: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: ''
+  });
+
+  const signUpOnchange = (e: any) => {
+   setUserDetails(prev => ({
+    ...prev,
+    [e.target.name]: e.target.value
+   }))
+  };
 
   return (
     <>
@@ -43,25 +59,34 @@ const SignUpDrawer = ({ isOpen, onClose }: any) => {
                 <Input
                   ref={firstField}
                   id="username"
+                  name='username'
                   placeholder="Please enter user name"
+                  onChange={(e) => signUpOnchange(e)}
                 />
               </Box>
 
               <Box>
                 <FormLabel htmlFor="firstName">First Name</FormLabel>
-                <Input id="firstName" placeholder="Please enter first name" />
+                <Input 
+                id="firstName" 
+                name='firstName'
+                placeholder="Please enter first name" />
               </Box>
 
               <Box>
-                <FormLabel htmlFor="firstName">Last Name</FormLabel>
-                <Input id="lastName" placeholder="Please enter last name" />
+                <FormLabel htmlFor="lastName">Last Name</FormLabel>
+                <Input 
+                id="lastName" 
+                name='lastName'
+                placeholder="Please enter last name" />
               </Box>
 
               <Box>
                 <FormLabel htmlFor="email">Email</FormLabel>
                 <Input
                   type="email"
-                  id="Email"
+                  id="email"
+                  name='email'
                   placeholder="Please email address"
                 />
               </Box>
@@ -71,17 +96,17 @@ const SignUpDrawer = ({ isOpen, onClose }: any) => {
                 <Input
                   type="password"
                   id="password"
+                  name='password'
                   placeholder="Choose a strong password"
                 />
               </Box>
 
               <Box>
                 <FormLabel htmlFor="terms"></FormLabel>
-                <Radio id="terms">
-                  <option value="true">
-                    I agree to the Terms &amp; Conditions
-                  </option>
-                </Radio>
+                <Checkbox 
+                  colorScheme='teal'>
+                  I agree to the Terms &amp; Conditions
+                </Checkbox>
               </Box>
             </Stack>
           </DrawerBody>
