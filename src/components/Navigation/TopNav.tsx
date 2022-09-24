@@ -29,7 +29,7 @@ const TopNav = () => {
     onClose: onCloseUser,
   } = useDisclosure();
 
-  const { user, logout } = useContext(UserContext);
+  const userctx = useContext(UserContext);
 
   return (
     <>
@@ -42,9 +42,9 @@ const TopNav = () => {
           justify="space-between"
         >
           <Box>Forum Z{/* standard link to home page? */}</Box>
-          {user.username ? (
+          {userctx?.user.username ? (
             <Button size="sm" onClick={onOpenUser}>
-              {user.username}
+              {userctx?.user.username}
             </Button>
           ) : (
             <ButtonGroup size="sm" spacing="4">

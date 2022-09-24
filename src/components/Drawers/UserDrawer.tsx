@@ -17,10 +17,10 @@ import {
 } from '@chakra-ui/react';
 
 const UserDrawer = ({ isOpen, onClose }: any) => {
-  const { user, logout } = useContext(UserContext);
+  const userctx = useContext(UserContext);
 
   const handleLogout = () => {
-    logout();
+    userctx?.logout();
     onClose();
   };
 
@@ -30,10 +30,12 @@ const UserDrawer = ({ isOpen, onClose }: any) => {
         <DrawerOverlay />
         <DrawerContent bg="grey.400">
           <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px">{user.username}</DrawerHeader>
+          <DrawerHeader borderBottomWidth="1px">
+            {userctx?.user.username}
+          </DrawerHeader>
 
           <Box
-            bg={user.banner}
+            bg={userctx?.user.banner}
             h="100px"
             w="100%"
             display="flex"

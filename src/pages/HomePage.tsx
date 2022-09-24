@@ -3,12 +3,12 @@ import { useContext } from 'react';
 import { UserContext } from '../hooks/UserContext';
 
 const HomePage = () => {
-  const { user } = useContext(UserContext);
+  const userctx = useContext(UserContext);
 
   return (
     <Layout>
       <h1>Home page</h1>
-      {user.username && <h2>Hi {user.username}</h2>}
+      {userctx?.user.username && <h2>Hi {userctx?.user.username}</h2>}
     </Layout>
   );
 };

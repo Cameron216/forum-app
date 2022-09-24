@@ -1,6 +1,19 @@
 import React, { useState, createContext } from 'react';
 
-const UserContext = createContext({});
+interface UserState {
+  username: string;
+  firstName: string;
+  lastName: string;
+  banner: string;
+  friends: string[];
+  watchedPosts: string[];
+}
+
+interface UserContextInterface {
+  user: UserState;
+  login: (userName: string, password: string) => void;
+  logout: () => void;
+}
 
 const userState = {
   username: '',
@@ -10,6 +23,8 @@ const userState = {
   friends: [],
   watchedPosts: [],
 };
+
+const UserContext = createContext<UserContextInterface | null>(null);
 
 const dan = {
   username: 'Dante',
@@ -30,7 +45,7 @@ const shireen = {
 };
 
 const UserProvider = ({ children }: any) => {
-  const [user, setUser] = useState(userState);
+  const [user, setUser] = useState(userState as UserState);
 
   const login = async (userName: string, password: string) => {
     // const userData = await fetch ....

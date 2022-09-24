@@ -23,10 +23,10 @@ const LoginDrawer = ({ isOpen, onClose }: any) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const { user, login } = useContext(UserContext);
+  const userctx = useContext(UserContext);
 
   const handleSubmit = () => {
-    login(username, password);
+    userctx?.login(username, password);
     setUsername('');
     setPassword('');
     onClose();
