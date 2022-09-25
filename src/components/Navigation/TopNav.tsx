@@ -5,10 +5,12 @@ import {
   Flex,
   useDisclosure,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../../hooks/UserContext';
 
-import UserDrawer from '../Drawers/UserDrawer';
+import LoginDrawer from '../Drawers/LoginDrawer';
 import SignUpDrawer from '../Drawers/SignUpDrawer';
+import UserDrawer from '../Drawers/UserDrawer';
 
 const TopNav = () => {
   const {
@@ -21,6 +23,13 @@ const TopNav = () => {
     onOpen: onOpenLogIn,
     onClose: onCloseLogIn,
   } = useDisclosure();
+  const {
+    isOpen: isUserOpen,
+    onOpen: onOpenUser,
+    onClose: onCloseUser,
+  } = useDisclosure();
+
+  const userctx = useContext(UserContext);
 
   return (
     <>
@@ -33,20 +42,34 @@ const TopNav = () => {
           justify="space-between"
         >
           <Box>Forum Z{/* standard link to home page? */}</Box>
-          <ButtonGroup size="sm" spacing="4">
-            <Button variant="solid" onClick={onOpenSignIn}>
-              Sign up
+          {userctx?.user.username ? (
+            <Button size="sm" onClick={onOpenUser}>
+              {userctx?.user.username}
             </Button>
-            <Button variant="outline" onClick={onOpenLogIn}>
-              Login
-            </Button>
-            {/* Buttons change to user icon and burger menu button for side drawer when logged in */}
-          </ButtonGroup>
+          ) : (
+            <ButtonGroup size="sm" spacing="4">
+              <Button variant="solid" onClick={onOpenSignIn}>
+                Sign up
+              </Button>
+              <Button variant="outline" onClick={onOpenLogIn}>
+                Login
+              </Button>
+            </ButtonGroup>
+          )}
         </Flex>
       </Flex>
 
-      <SignUpDrawer isOpen={isSignInOpen} onClose={onCloseSignIn} />
-      <UserDrawer isOpen={isLogInOpen} onClose={onCloseLogIn} />
+      <SignUpDrawer
+        isOpen={isSignInOpen}
+        onClose={onCloseSignIn}
+        openLogin={onOpenLogIn}
+      />
+      <LoginDrawer
+        isOpen={isLogInOpen}
+        onClose={onCloseLogIn}
+        openSignIn={onOpenSignIn}
+      />
+      <UserDrawer isOpen={isUserOpen} onClose={onCloseUser} />
     </>
   );
 };

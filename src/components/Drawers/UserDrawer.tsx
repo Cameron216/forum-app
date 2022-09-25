@@ -1,7 +1,6 @@
-//have conditional rendering if logged in or not
-//when logged in becomes utility sidebar with profile settings etc.
-
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import { Link as ReactLink } from 'react-router-dom';
+import { UserContext } from '../../hooks/UserContext';
 import {
   Drawer,
   DrawerBody,
@@ -12,54 +11,61 @@ import {
   DrawerCloseButton,
   Button,
   Box,
-  FormLabel,
   Stack,
-  Input,
+  Link,
+  Spacer,
 } from '@chakra-ui/react';
 
 const UserDrawer = ({ isOpen, onClose }: any) => {
-  const firstField = React.useRef() as React.MutableRefObject<HTMLInputElement>;
+  const userctx = useContext(UserContext);
+
+  const handleLogout = () => {
+    userctx?.logout();
+    onClose();
+  };
 
   return (
     <>
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        initialFocusRef={firstField}
-        onClose={onClose}
-      >
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent bg="grey.400">
           <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px">Log in</DrawerHeader>
+          <DrawerHeader borderBottomWidth="1px">
+            {userctx?.user.username}
+          </DrawerHeader>
+
+          <Box
+            bg={userctx?.user.banner}
+            h="100px"
+            w="100%"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <h2>Add user banner choice here</h2>
+          </Box>
 
           <DrawerBody>
             <Stack spacing="24px">
-              <Box>
-                <FormLabel htmlFor="username">Username</FormLabel>
-                <Input
-                  ref={firstField}
-                  id="username"
-                  placeholder="Please enter user name"
-                />
-              </Box>
-
-              <Box>
-                <FormLabel htmlFor="password">Password</FormLabel>
-                <Input
-                  type="password"
-                  id="password"
-                  placeholder="Enter password"
-                />
-              </Box>
+              <Link as={ReactLink} to="">
+                <h2>Profile</h2>
+              </Link>
+              <Link as={ReactLink} to="">
+                <h2>Watched posts</h2>
+              </Link>
+              <Link as={ReactLink} to="">
+                <h2>Friends</h2>
+              </Link>
+              <Link as={ReactLink} to="">
+                <h2>Trophies</h2>
+              </Link>
             </Stack>
           </DrawerBody>
 
           <DrawerFooter borderTopWidth="1px">
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
+            <Button variant="outline" mr={3} onClick={handleLogout}>
+              Log out
             </Button>
-            <Button>Log in</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
