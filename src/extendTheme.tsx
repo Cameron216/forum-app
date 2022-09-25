@@ -8,16 +8,18 @@ const customTheme = extendTheme({
         color: 'white',
       },
       a: {
-        color: 'teal.500',
+        color: '#38B2AC',
+        fontWeight: 'bold',
         _hover: {
-          textDecoration: 'underline',
+          textDecoration: 'none',
+          color: '#2C7A7b',
         },
       },
     },
   },
   colors: {
     brand: {
-      100: '#1D4044',
+      100: '#2C7A7b',
     },
     buttons: {
       100: 'blue',
@@ -30,6 +32,12 @@ const customTheme = extendTheme({
       200: 'hsla(0, 0%, 16%, 1)',
       100: 'hsla(0, 0%, 1%, 1)',
     },
+    error: {
+      100: '#E53E3E',
+    },
+    links: {
+      100: '#2C7A7b',
+    },
   },
   fonts: {
     body: '',
@@ -41,9 +49,6 @@ const customTheme = extendTheme({
       defaultProps: {
         colorScheme: 'teal',
       },
-    },
-    Submit: {
-      // colorScheme: 'teal'
     },
     Drawer: {
       defaultProps: {
