@@ -59,8 +59,16 @@ const TopNav = () => {
         </Flex>
       </Flex>
 
-      <SignUpDrawer isOpen={isSignInOpen} onClose={onCloseSignIn} />
-      <LoginDrawer isOpen={isLogInOpen} onClose={onCloseLogIn} />
+      <SignUpDrawer
+        isOpen={isSignInOpen}
+        onClose={onCloseSignIn}
+        openLogin={onOpenLogIn}
+      />
+      <LoginDrawer
+        isOpen={isLogInOpen}
+        onClose={onCloseLogIn}
+        openSignIn={onOpenSignIn}
+      />
       <UserDrawer isOpen={isUserOpen} onClose={onCloseUser} />
     </>
   );
