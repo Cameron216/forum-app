@@ -11,7 +11,7 @@ interface UserState {
 
 interface UserContextInterface {
   user: UserState;
-  login: (userName: string, password: string) => void;
+  login: (userName: UserState) => void;
   logout: () => void;
 }
 
@@ -26,39 +26,11 @@ const userState = {
 
 const UserContext = createContext<UserContextInterface | null>(null);
 
-const dan = {
-  username: 'Dante',
-  firstName: 'Daniel',
-  lastName: 'Stewardson',
-  banner: 'tomato',
-  friends: ['Cameron', 'Shireen'],
-  watchedPosts: [],
-};
-
-const shireen = {
-  username: 'Shireen',
-  firstName: 'Shireen',
-  lastName: 'Nicholls',
-  banner: 'blue',
-  friends: ['Cameron', 'Daniel'],
-  watchedPosts: [],
-};
-
 const UserProvider = ({ children }: any) => {
   const [user, setUser] = useState(userState as UserState);
 
-  const login = async (userName: string, password: string) => {
-    // const userData = await fetch ....
-    switch (userName) {
-      case 'dan':
-        setUser(dan);
-        break;
-      case 'shireen':
-        setUser(shireen);
-        break;
-      default:
-        alert('Enter a valid login');
-    }
+  const login = (username: UserState) => {
+    setUser(username);
   };
 
   const logout = () => {
