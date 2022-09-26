@@ -55,6 +55,11 @@ const customTheme = extendTheme({
         size: 'sm',
       },
     },
+    Badge: {
+      defaultProps: {
+        colorScheme: 'teal',
+      },
+    },
   },
 });
 
