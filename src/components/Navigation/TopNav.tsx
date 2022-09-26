@@ -33,7 +33,14 @@ const TopNav = () => {
 
   return (
     <>
-      <Flex w="100%" bg="grey.600" justify="center" position="sticky" top="0">
+      <Flex
+        w="100%"
+        bg="grey.600"
+        justify="center"
+        position="sticky"
+        top="0"
+        zIndex="10"
+      >
         <Flex
           w="95%"
           p={2}
