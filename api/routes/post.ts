@@ -2,13 +2,15 @@ import express, { Request, Response } from 'express';
 
 export const router = express.Router();
 
-const { createPost, getPosts } = require('../controllers/post.controller');
+const {
+  createPost,
+  findPost,
+  getPosts,
+} = require('../controllers/post.controller');
 
 router.get('/', getPosts);
 
-router.get('/:id', (req: Request, res: Response) => {
-  res.send('Single post');
-});
+router.get('/:id', findPost);
 
 router.post('/', createPost);
 

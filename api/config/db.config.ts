@@ -9,8 +9,8 @@ const sequelize = new Sequelize(
   process.env.DB_PASSWORD,
   {
     host: process.env.DB_HOST_NAME,
-    dialectL: 'mysql',
+    dialect: 'mysql',
   }
 );
 
-export default sequelize;
+module.exports = sequelize;
