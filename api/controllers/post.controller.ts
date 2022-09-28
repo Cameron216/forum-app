@@ -3,28 +3,32 @@ import { Request, Response } from 'express';
 import Logger from '../lib/logger';
 
 const Post = require('../models/post.model');
+const User = require('../models/user.model');
 
 exports.createPost = async (req: Request, res: Response) => {
-  if (
-    !req.body.userId ||
-    !req.body.parentPostId ||
-    !req.body.postTitle ||
-    !req.body.postContent
-  ) {
+  if (!req.body.userId || !req.body.postTitle || !req.body.postContent) {
     return res.status(422).json({
       userId: 'userId is required',
-      parentPostId: 'parentPostId is required',
       postTitle: 'postTitle is required',
       postContent: 'postContent is required',
     });
   }
 
-  Post.create({
-    userId: req.body.userId,
-    parentPostId: req.body.parentPostId,
-    postTitle: req.body.postTitle,
-    postContent: req.body.postContent,
-  })
+  const user = await User.findByPk(req.body.userId);
+
+  if (!user) {
+    res
+      .status(404)
+      .send({ message: 'User does not exist with provided userId' });
+    return;
+  }
+
+  user
+    .createPost({
+      parentPostId: req.body.parentPostId,
+      postTitle: req.body.postTitle,
+      postContent: req.body.postContent,
+    })
     .then(() => {
       res.status(200).send({ success: true });
     })

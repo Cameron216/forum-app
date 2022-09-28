@@ -10,9 +10,6 @@ const Post = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    userId: {
-      type: Sequelize.INTEGER,
-    },
     parentPostId: {
       type: Sequelize.INTEGER,
     },

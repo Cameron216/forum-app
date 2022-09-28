@@ -16,7 +16,6 @@ exports.createUser = async (req: Request, res: Response) => {
     ...req.body,
   })
     .then((result: any) => {
-      Logger.info(result);
       res.status(200).send({ success: true });
     })
     .catch((err: unknown) => {
