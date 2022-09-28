@@ -5,6 +5,7 @@ const cors = require('cors');
 const sequelize = require('./config/db.config');
 
 import { router as postRouter } from './routes/post';
+import { router as userRouter } from './routes/user';
 import Logger from './lib/logger';
 
 dotenv.config();
@@ -18,11 +19,11 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/post', postRouter);
+app.use('/user', userRouter);
 
 sequelize
   .sync()
-  .then((result: any) => {
-    console.log(result);
+  .then(() => {
     app.listen(port, () => {
       Logger.info(`Server listening on port: ${port}`);
     });
