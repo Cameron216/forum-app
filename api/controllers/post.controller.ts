@@ -25,23 +25,23 @@ exports.createPost = async (req: Request, res: Response) => {
     postTitle: req.body.postTitle,
     postContent: req.body.postContent,
   })
-    .then((result: any) => {
-      res.send({ success: true });
+    .then(() => {
+      res.status(200).send({ success: true });
     })
-    .catch((err: any) => {
+    .catch((err: unknown) => {
       Logger.error(err);
-      res.send({ error: true });
+      res.status(500).send({ error: true });
     });
 };
 
 exports.getPosts = async (req: Request, res: Response) => {
   Post.findAll()
-    .then((result: any) => {
-      res.send(result);
+    .then((posts: any) => {
+      res.status(200).send(posts);
     })
-    .catch((err: any) => {
+    .catch((err: unknown) => {
       Logger.error(err);
-      res.send({ error: true });
+      res.status(500).send({ error: true });
     });
 };
 
@@ -50,11 +50,56 @@ exports.findPost = async (req: Request, res: Response) => {
 
   Post.findByPk(postId)
     .then((post: any) => {
-      console.log(post);
-      res.send(post);
+      res.status(200).send(post);
     })
-    .catch((err: any) => {
+    .catch((err: unknown) => {
       Logger.error(err);
       res.status(500).send(err);
+    });
+};
+
+exports.updatePost = async (req: Request, res: Response) => {
+  if (!req.body.postTitle || !req.body.postContent) {
+    return res.status(422).json({
+      postTitle: 'postTitle is required',
+      postContent: 'postContent is required',
+    });
+  }
+
+  Post.update(
+    {
+      updatedDate: new Date().toISOString(),
+      postTitle: req.body.postTitle,
+      postContent: req.body.postContent,
+    },
+    {
+      where: {
+        id: req.params.id,
+      },
+    }
+  )
+    .then(() => {
+      res.status(200).send({ success: true });
+    })
+    .catch((err: unknown) => {
+      Logger.error(err);
+      res.status(500).send({ error: true });
+    });
+};
+
+exports.deletePost = async (req: Request, res: Response) => {
+  Post.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((result: number) => {
+      result
+        ? res.status(200).send({ message: 'Post successfully deleted' })
+        : res.status(404).send({ message: 'Post does not exist' });
+    })
+    .catch((err: unknown) => {
+      Logger.error(err);
+      res.status(500).send({ error: true });
     });
 };

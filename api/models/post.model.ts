@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+import Sequelize from 'sequelize';
 
 const sequelize = require('../config/db.config');
 
@@ -8,7 +8,6 @@ const Post = sequelize.define(
     id: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
-      allowNull: false,
       primaryKey: true,
     },
     userId: {

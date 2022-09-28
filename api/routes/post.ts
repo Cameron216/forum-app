@@ -1,11 +1,13 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 
 export const router = express.Router();
 
 const {
   createPost,
+  deletePost,
   findPost,
   getPosts,
+  updatePost,
 } = require('../controllers/post.controller');
 
 router.get('/', getPosts);
@@ -14,10 +16,6 @@ router.get('/:id', findPost);
 
 router.post('/', createPost);
 
-router.put('/:id', (req: Request, res: Response) => {
-  res.send('Update post');
-});
+router.put('/:id', updatePost);
 
-router.delete('/:id', (req: Request, res: Response) => {
-  res.send('Delete post');
-});
+router.delete('/:id', deletePost);
