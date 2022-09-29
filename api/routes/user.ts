@@ -1,19 +1,21 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 
 export const router = express.Router();
 
-router.get('/:id', (req: Request, res: Response) => {
-  res.send('Get user');
-});
+const {
+  createUser,
+  deleteUser,
+  findUser,
+  getUsers,
+  updateUser,
+} = require('../controllers/user.controller');
 
-router.post('/', (req: Request, res: Response) => {
-  res.send('Create user');
-});
+router.get('/', getUsers);
 
-router.put('/', (req: Request, res: Response) => {
-  res.send('Update user');
-});
+router.get('/:id', findUser);
 
-router.delete('/', (req: Request, res: Response) => {
-  res.send('Delete user');
-});
+router.post('/', createUser);
+
+router.put('/:id', updateUser);
+
+router.delete('/:id', deleteUser);
