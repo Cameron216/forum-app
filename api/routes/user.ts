@@ -1,14 +1,13 @@
 import express from 'express';
-
-export const router = express.Router();
-
-const {
+import {
   createUser,
   deleteUser,
   findUser,
   getUsers,
   updateUser,
-} = require('../controllers/user.controller');
+} from '../controllers/user.controller';
+
+export const router = express.Router();
 
 router.get('/', getUsers);
 

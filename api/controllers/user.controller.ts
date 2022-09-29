@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
-const bcrypt = require('bcrypt');
+import bcrypt from 'bcrypt';
 
 import Logger from '../lib/logger';
 import { UserType } from '../types/user';
 
-const User = require('../models/user.model');
+import { User } from '../models/user.model';
 
-exports.createUser = async (req: Request, res: Response) => {
+export const createUser = async (req: Request, res: Response) => {
   if (!req.body.username || !req.body.password) {
     return res.status(422).json({
       username: 'username is required',
@@ -32,7 +32,7 @@ exports.createUser = async (req: Request, res: Response) => {
     });
 };
 
-exports.getUsers = async (req: Request, res: Response) => {
+export const getUsers = async (req: Request, res: Response) => {
   User.findAll()
     .then((users: any) => res.status(200).send(users))
     .catch((err: unknown) => {
@@ -41,7 +41,7 @@ exports.getUsers = async (req: Request, res: Response) => {
     });
 };
 
-exports.findUser = async (req: Request, res: Response) => {
+export const findUser = async (req: Request, res: Response) => {
   const userId = req.params.id;
 
   User.findByPk(userId)
@@ -54,7 +54,7 @@ exports.findUser = async (req: Request, res: Response) => {
     });
 };
 
-exports.updateUser = async (req: Request, res: Response) => {
+export const updateUser = async (req: Request, res: Response) => {
   User.update(
     {
       ...req.body,
@@ -65,14 +65,14 @@ exports.updateUser = async (req: Request, res: Response) => {
       },
     }
   )
-    .then(res.status(200).send({ success: true }))
+    .then(() => res.status(200).send({ success: true }))
     .catch((err: unknown) => {
       Logger.error(err);
       res.status(500).send({ error: true });
     });
 };
 
-exports.deleteUser = async (req: Request, res: Response) => {
+export const deleteUser = async (req: Request, res: Response) => {
   User.destroy({
     where: {
       id: req.params.id,

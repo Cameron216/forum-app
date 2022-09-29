@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
+import { Sequelize } from 'sequelize';
 
 import Logger from '../lib/logger';
 
-const Post = require('../models/post.model');
-const User = require('../models/user.model');
+import { Post } from '../models/post.model';
+import { User } from '../models/user.model';
 
-exports.createPost = async (req: Request, res: Response) => {
+export const createPost = async (req: Request, res: Response) => {
   if (!req.body.userId || !req.body.postTitle || !req.body.postContent) {
     return res.status(422).json({
       userId: 'userId is required',
@@ -14,7 +15,7 @@ exports.createPost = async (req: Request, res: Response) => {
     });
   }
 
-  const user = await User.findByPk(req.body.userId);
+  const user: any = await User.findByPk(req.body.userId);
 
   if (!user) {
     res
@@ -38,7 +39,7 @@ exports.createPost = async (req: Request, res: Response) => {
     });
 };
 
-exports.getPosts = async (req: Request, res: Response) => {
+export const getPosts = async (req: Request, res: Response) => {
   Post.findAll()
     .then((posts: any) => {
       res.status(200).send(posts);
@@ -49,7 +50,7 @@ exports.getPosts = async (req: Request, res: Response) => {
     });
 };
 
-exports.findPost = async (req: Request, res: Response) => {
+export const findPost = async (req: Request, res: Response) => {
   const postId = req.params.id;
 
   Post.findByPk(postId)
@@ -62,7 +63,7 @@ exports.findPost = async (req: Request, res: Response) => {
     });
 };
 
-exports.updatePost = async (req: Request, res: Response) => {
+export const updatePost = async (req: Request, res: Response) => {
   if (!req.body.postTitle || !req.body.postContent) {
     return res.status(422).json({
       postTitle: 'postTitle is required',
@@ -91,7 +92,7 @@ exports.updatePost = async (req: Request, res: Response) => {
     });
 };
 
-exports.deletePost = async (req: Request, res: Response) => {
+export const deletePost = async (req: Request, res: Response) => {
   Post.destroy({
     where: {
       id: req.params.id,

@@ -1,8 +1,8 @@
 import Sequelize from 'sequelize';
 
-const sequelize = require('../config/db.config');
+import { sequelize } from '../config/db.config';
 
-const Post = sequelize.define(
+export const Post = sequelize.define(
   'Posts',
   {
     id: {
@@ -33,5 +33,3 @@ const Post = sequelize.define(
     timestamps: false,
   }
 );
-
-module.exports = Post;
