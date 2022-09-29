@@ -6,7 +6,7 @@ import { ChatIcon } from '@chakra-ui/icons';
 
 const HomePage = () => {
   const userctx = useContext(UserContext);
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<[]>([]);
 
   useEffect(() => {
     fetch('http://localhost:5000/post')
@@ -36,8 +36,8 @@ const HomePage = () => {
         )}
       </Flex>
       <VStack py="2" spacing="30px">
-        {posts &&
-          posts.map((post: any) => {
+        {posts.length ? (
+          posts?.map((post: any) => {
             return (
               <Box
                 key={post.id}
@@ -82,7 +82,14 @@ const HomePage = () => {
                 </Flex>
               </Box>
             );
-          })}
+          })
+        ) : (
+          <Box>
+            <Text>
+              Either there are no posts or this thing doesn't actually work 😊
+            </Text>
+          </Box>
+        )}
       </VStack>
     </Layout>
   );

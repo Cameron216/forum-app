@@ -15,7 +15,7 @@ export const User = sequelize.define(
       allowNull: false,
     },
     password: {
-      type: Sequelize.STRING(50),
+      type: Sequelize.TEXT,
       allowNull: false,
     },
     dateJoined: {
