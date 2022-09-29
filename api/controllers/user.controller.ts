@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
+const bcrypt = require('bcrypt');
 
 import Logger from '../lib/logger';
+import { UserType } from '../types/user';
 
 const User = require('../models/user.model');
 
@@ -12,10 +14,16 @@ exports.createUser = async (req: Request, res: Response) => {
     });
   }
 
-  User.create({
-    ...req.body,
-  })
-    .then((result: any) => {
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+  const newUser: UserType = {
+    username: req.body.username,
+    password: hashedPassword,
+  };
+
+  User.create(newUser)
+    .then(() => {
       res.status(200).send({ success: true });
     })
     .catch((err: unknown) => {
