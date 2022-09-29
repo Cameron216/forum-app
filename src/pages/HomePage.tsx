@@ -1,15 +1,7 @@
 import Layout from '../components/Layouts/Layout';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../hooks/UserContext';
-import {
-  Avatar,
-  Badge,
-  Box,
-  Divider,
-  Flex,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Avatar, Box, Divider, Flex, Text, VStack } from '@chakra-ui/react';
 import { ChatIcon } from '@chakra-ui/icons';
 
 const HomePage = () => {

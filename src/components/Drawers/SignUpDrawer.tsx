@@ -21,7 +21,6 @@ import {
   InputRightElement,
   FormControl,
   FormErrorMessage,
-  Link,
 } from '@chakra-ui/react';
 
 const SignUpDrawer = ({ isOpen, onClose, openLogin }: any) => {
