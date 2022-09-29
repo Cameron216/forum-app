@@ -14,6 +14,20 @@ export const createUser = async (req: Request, res: Response) => {
     });
   }
 
+  const userExists = await User.findAll({
+    where: {
+      username: req.body.username,
+    },
+  });
+
+  if (userExists.length !== 0) {
+    res.status(422).send({
+      message: 'user with supplied username already exists',
+      success: false,
+    });
+    return;
+  }
+
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
