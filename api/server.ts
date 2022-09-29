@@ -6,6 +6,7 @@ const sequelize = require('./config/db.config');
 
 import { router as postRouter } from './routes/post';
 import { router as userRouter } from './routes/user';
+import { router as authRouter } from './routes/auth';
 import Logger from './lib/logger';
 
 const User = require('./models/user.model');
@@ -23,6 +24,7 @@ app.use(express.json());
 
 app.use('/post', postRouter);
 app.use('/user', userRouter);
+app.use(authRouter);
 
 Post.belongsTo(User, {
   foreignKey: 'userId',
