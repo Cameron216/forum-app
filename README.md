@@ -1,34 +1,93 @@
 # Simple forum app
 
+Simple JavaScript forum application which allows users to view forum posts/sign up and create/reply to posts.
+
+## Table of contents  
+
+- [Tech stack](#tech-stack)  
+  - [Frontend](#frontend)  
+  - [API](#api)  
+  - [Database](#database)
+    - [Example table structure](#example-table-structure)
+- [Project setup](#project-setup)
+- [Storybook](#storybook)
+- [Docker](#docker)
+- [Deployment](#deployment)
+- [Todo](#todo)
+
 ## Tech stack
 
 ### Frontend
 
-- React
+- React (bootstrapped with create-react-app)
 - Typescript
 - Storybook
 - ChakraUI
+- Docker
 
 ### API
 
 - Express
 - Node.js
 - Typescript
-- MySQL
+- Sequelize
+- Docker
 
-## DB tables
+### Database
+
+Uses an AWS RDS MySQL database to store data.
+
+#### Example table structure
 
 | Post | User |  
 | ---- | ---- |  
-| Id   | Id    |  
-| UserId | username |
+| id   | id    |  
+| userId | username |
 | parentPostId | dateJoined |
 | createdDate | displayName |
 | updatedDate | password |
 | postTitle | profilePicture |
 | postContent |
 
-## ToDo
+## Project setup
+
+Clone repository using below command:
+
+`git clone https://github.com/Cameron216/forum-app.git`
+
+Then run below command in root directory to install dependencies for both the frontend and api:
+
+`npm run setup`
+
+Both frontend and api can be started on their respective ports by running the `npm run dev` command.
+
+## Storybook
+
+The frontend project uses the Storybook design system package to produce a UI for building, managing and inspecting components.
+
+This UI can be open by running the below in the project root:
+
+`npm run storybook`
+
+## Docker
+
+Both the frontend and api have a Dockerfile for generating images and running containers which are setup to be able to work locally within the containers.
+
+There is also a docker-compose file for managing, creating and removing the containers and volumes which includes a container for the Storybook ui.
+
+You can create the images and spin up the 3 containers by running the below command:
+
+`docker compose up -d`
+
+To tear down the containers you can run:
+
+`docker compose down`
+
+## Deployment
+
+Todo
+
+## Todo
 
 - [x]  Connect frontend to backend
 - [ ]  Setup storybook for component ui library
@@ -57,19 +116,23 @@
     - [ ]  Rich text editor for adding posts
     - [ ]  Allow user to edit posts and save
 - [ ]  Build out backend
-  - [ ]  Authentication with frontend and db
-  - [ ]  Account endpoints
-    - [ ]  Get user by username/email
-    - [ ]  Update user details (separate endpoint for each field?)
-    - [ ]  Save post
-    - [ ]  Edit post
-    - [ ]  Get posts
-    - [ ]  Paginate response (send x records at a time)
-    - [ ]  Get post by id
-- [ ]  Setup database
+  - [ ]  Authentication with frontend
+  - [x]  User endpoints
+    - [x]  Get user by id
+    - [x]  Get all users
+    - [x]  Create user
+    - [x]  Update user
+    - [x]  Delete user
+  - [x]  Post endpoints
+    - [x]  Save post
+    - [x]  Edit post
+    - [x]  Get all posts
+    - [x]  Get post
+    - [x]  Delete post
+- [x]  Setup database
   - [x]  Create RDS MySQL db in AWS
-  - [ ]  Create database table layout
-  - [ ]  Connect api to db
+  - [x]  Create database table layout
+  - [x]  Connect api to db
 - [ ]  Setup authentication
   - [ ]  Credentials between db and api
   - [ ]  Auth between api and frontend
@@ -80,9 +143,9 @@
       - [ ]  What is used in the industry currently?
 - [ ]  Setup env files for both frontend and backend
 - [ ]  Setup pre-commit hooks for linting project
-- [ ]  Add content to readme file
-  - [ ]  Project details
-  - [ ]  How to clone and start the project etc
+- [x]  Add content to readme file
+  - [x]  Project details
+  - [x]  How to clone and start the project
 
 ### Optional features
 
@@ -93,14 +156,12 @@
   - [ ]  Integration testing & end to end testing
     - [ ]  Use cypress
 - [ ]  Setup ci/cd pipeline
-  - [ ]  Circle ci for pipeline?
-  - [ ]  Where to deploy too? Probably don’t need to? Unless wanna try somewhere free?
+  - [x]  Use Github actions
+  - [ ]  Deploy to AWS ECS/ECR or Netlify
 - [ ]  Try chromatic out for visual snapshot testing review?
-- [ ]  Creating error logging for the site
-  - [ ]  Store error logs in a mongodb database?
-  - [ ]  Or just store in a file
+- [x]  Create error logging for the api using Winston package
 - [ ]  Add docker
-  - [ ]  Create dockerfile
-  - [ ]  Setup containers
-  - [ ]  Setup docker compose
-  - [ ]  Try deploying somewhere?
+  - [x]  Create dockerfile
+  - [x]  Setup containers
+  - [x]  Setup docker compose
+  - [ ]  Try deploying somewhere

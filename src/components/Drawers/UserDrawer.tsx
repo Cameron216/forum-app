@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link as ReactLink } from 'react-router-dom';
 import { UserContext } from '../../hooks/UserContext';
 import {
@@ -13,7 +13,6 @@ import {
   Box,
   Stack,
   Link,
-  Spacer,
 } from '@chakra-ui/react';
 
 const UserDrawer = ({ isOpen, onClose }: any) => {

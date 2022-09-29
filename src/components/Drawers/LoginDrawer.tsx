@@ -18,7 +18,6 @@ import {
   InputRightElement,
   FormControl,
   FormErrorMessage,
-  Link,
   Text,
 } from '@chakra-ui/react';
 
@@ -31,27 +30,7 @@ const LoginDrawer = ({ isOpen, onClose, openSignIn }: any) => {
   const [errMsg, setErrMsg] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const userctx = useContext(UserContext);
-
-  // ------------------------------------------------------- temp data
-  const dan = {
-    username: 'Dante',
-    firstName: 'Daniel',
-    lastName: 'Stewardson',
-    banner: 'tomato',
-    friends: ['Cameron', 'Shireen'],
-    watchedPosts: [],
-  };
-
-  const shireen = {
-    username: 'Shireen',
-    firstName: 'Shireen',
-    lastName: 'Nicholls',
-    banner: 'blue',
-    friends: ['Cameron', 'Daniel'],
-    watchedPosts: [],
-  };
-  // -----------------------------------------------------------------------
+  const userCtx = useContext(UserContext);
 
   const handleChange = (e: any) => {
     switch (e.target.name) {
@@ -78,18 +57,24 @@ const LoginDrawer = ({ isOpen, onClose, openSignIn }: any) => {
       }
       return;
     }
-    // ---------------------------------------------------change for fetch call
-    if (username === 'dan') {
-      userctx?.login(dan);
-      handleCloseDrawer();
-    } else if (username === 'shireen') {
-      userctx?.login(shireen);
-      handleCloseDrawer();
-    } else {
-      setErrMsg(
-        'User not found/password inccorect message\n(use dan or shireen)'
-      );
-    }
+
+    fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username: username, password: password }),
+    })
+      .then((res: any) => res.json())
+      .then((data: any) => {
+        if (data.success) {
+          userCtx?.login({ username: data.user.username });
+          handleCloseDrawer();
+          return;
+        }
+        setErrMsg(data.message);
+      })
+      .catch((err) => console.log(err));
   };
 
   const goToSignIn = () => {

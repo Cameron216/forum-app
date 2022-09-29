@@ -1,15 +1,16 @@
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
-const cors = require('cors');
+import cors from 'cors';
 
-const sequelize = require('./config/db.config');
+import { sequelize } from './config/db.config';
 
 import { router as postRouter } from './routes/post';
 import { router as userRouter } from './routes/user';
+import { router as authRouter } from './routes/auth';
 import Logger from './lib/logger';
 
-const User = require('./models/user.model');
-const Post = require('./models/post.model');
+import { User } from './models/user.model';
+import { Post } from './models/post.model';
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use(express.json());
 
 app.use('/post', postRouter);
 app.use('/user', userRouter);
+app.use(authRouter);
 
 Post.belongsTo(User, {
   foreignKey: 'userId',

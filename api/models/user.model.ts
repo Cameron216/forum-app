@@ -1,8 +1,8 @@
 import Sequelize from 'sequelize';
 
-const sequelize = require('../config/db.config');
+import { sequelize } from '../config/db.config';
 
-const User = sequelize.define(
+export const User = sequelize.define(
   'Users',
   {
     id: {
@@ -15,7 +15,7 @@ const User = sequelize.define(
       allowNull: false,
     },
     password: {
-      type: Sequelize.STRING(50),
+      type: Sequelize.TEXT,
       allowNull: false,
     },
     dateJoined: {
@@ -33,5 +33,3 @@ const User = sequelize.define(
     timestamps: false,
   }
 );
-
-module.exports = User;

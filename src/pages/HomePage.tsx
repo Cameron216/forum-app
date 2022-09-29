@@ -1,24 +1,18 @@
 import Layout from '../components/Layouts/Layout';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../hooks/UserContext';
-import {
-  Avatar,
-  Badge,
-  Box,
-  Divider,
-  Flex,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Avatar, Box, Divider, Flex, Text, VStack } from '@chakra-ui/react';
 import { ChatIcon } from '@chakra-ui/icons';
 
 const HomePage = () => {
   const userctx = useContext(UserContext);
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/post')
-      .then((res) => res.json())
+    fetch('/post')
+      .then((res) => {
+        return res.json();
+      })
       .then((data: any) => {
         setPosts(data);
       })
@@ -44,8 +38,8 @@ const HomePage = () => {
         )}
       </Flex>
       <VStack py="2" spacing="30px">
-        {posts &&
-          posts.map((post: any) => {
+        {posts.length ? (
+          posts?.map((post: any) => {
             return (
               <Box
                 key={post.id}
@@ -90,7 +84,14 @@ const HomePage = () => {
                 </Flex>
               </Box>
             );
-          })}
+          })
+        ) : (
+          <Box>
+            <Text>
+              Either there are no posts or this thing doesn't actually work 😊
+            </Text>
+          </Box>
+        )}
       </VStack>
     </Layout>
   );

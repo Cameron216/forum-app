@@ -2,11 +2,11 @@ import React, { useState, createContext } from 'react';
 
 interface UserState {
   username: string;
-  firstName: string;
-  lastName: string;
-  banner: string;
-  friends: string[];
-  watchedPosts: string[];
+  firstName?: string;
+  lastName?: string;
+  banner?: string;
+  friends?: string[];
+  watchedPosts?: string[];
 }
 
 interface UserContextInterface {
