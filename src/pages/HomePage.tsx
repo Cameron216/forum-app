@@ -9,8 +9,10 @@ const HomePage = () => {
   const [posts, setPosts] = useState<[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/post')
-      .then((res) => res.json())
+    fetch('/post')
+      .then((res) => {
+        return res.json();
+      })
       .then((data: any) => {
         setPosts(data);
       })

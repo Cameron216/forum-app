@@ -6,6 +6,7 @@ import { Request, Response } from 'express';
 import Logger from '../lib/logger';
 import { User } from '../models/user.model';
 import { UserType } from '../types/user';
+import { LogError } from 'concurrently';
 
 dotenv.config();
 
@@ -51,7 +52,7 @@ export const signup = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
   if (!req.body.username || !req.body.password) {
-    return res.status(422).json({
+    return res.status(422).send({
       username: 'username is required',
       password: 'password is required',
     });
@@ -110,7 +111,7 @@ export const login = async (req: Request, res: Response) => {
   res.status(200).send({
     success: true,
     message: 'successfully logged in',
-    user: { userName: user.username },
+    user: { username: user.username },
   });
 };
 
