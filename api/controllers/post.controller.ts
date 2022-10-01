@@ -15,12 +15,24 @@ export const createPost = async (req: Request, res: Response) => {
     });
   }
 
-  const user: any = await User.findByPk(req.body.userId);
+  let user: any;
+
+  try {
+    user = await User.findByPk(req.body.userId);
+  } catch (err: any) {
+    Logger.log(err);
+    res.status(500).send({
+      success: false,
+      message: 'Error occurred while communicating with the database',
+    });
+    return;
+  }
 
   if (!user) {
-    res
-      .status(404)
-      .send({ message: 'User does not exist with provided userId' });
+    res.status(404).send({
+      success: false,
+      message: 'User does not exist with provided userId',
+    });
     return;
   }
 
@@ -35,7 +47,10 @@ export const createPost = async (req: Request, res: Response) => {
     })
     .catch((err: unknown) => {
       Logger.error(err);
-      res.status(500).send({ error: true });
+      res.status(500).send({
+        success: false,
+        message: 'Error occurred while communicating with the database',
+      });
     });
 };
 
@@ -46,7 +61,10 @@ export const getPosts = async (req: Request, res: Response) => {
     })
     .catch((err: unknown) => {
       Logger.error(err);
-      res.status(500).send({ error: true });
+      res.status(500).send({
+        success: false,
+        message: 'Error occurred while communicating with the database',
+      });
     });
 };
 
@@ -59,7 +77,10 @@ export const findPost = async (req: Request, res: Response) => {
     })
     .catch((err: unknown) => {
       Logger.error(err);
-      res.status(500).send(err);
+      res.status(500).send({
+        success: false,
+        message: 'Error occurred while communicating with the database',
+      });
     });
 };
 
@@ -88,7 +109,10 @@ export const updatePost = async (req: Request, res: Response) => {
     })
     .catch((err: unknown) => {
       Logger.error(err);
-      res.status(500).send({ error: true });
+      res.status(500).send({
+        success: false,
+        message: 'Error occurred while communicating with the database',
+      });
     });
 };
 
@@ -105,6 +129,9 @@ export const deletePost = async (req: Request, res: Response) => {
     })
     .catch((err: unknown) => {
       Logger.error(err);
-      res.status(500).send({ error: true });
+      res.status(500).send({
+        success: false,
+        message: 'Error occurred while communicating with the database',
+      });
     });
 };
