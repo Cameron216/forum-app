@@ -35,6 +35,27 @@ export const createPost = async (req: Request, res: Response) => {
     return;
   }
 
+  if (req.body.parentPostId) {
+    try {
+      const parentPost = await Post.findByPk(req.body.parentPostId);
+
+      if (!parentPost) {
+        res.status(404).send({
+          success: false,
+          message: 'Post you are replying to does not exist',
+        });
+        return;
+      }
+    } catch (err: any) {
+      Logger.log(err);
+      res.status(500).send({
+        success: false,
+        message: 'Error occurred while communicating with the database',
+      });
+      return;
+    }
+  }
+
   user
     .createPost({
       parentPostId: req.body.parentPostId,
